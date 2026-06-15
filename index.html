@@ -3,584 +3,591 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy 17th Birthday Intan ❤️</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Sacramento&family=Pinyon+Script&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
+    <title>The Ultimate Happy Birthday Dashboard v2.0 🚀</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
+        /* ==========================================================================
+           1. CORE STYLES & VARIABLE THEMES (Biar Tampilan Super Aesthetic)
+           ========================================================================== */
         :root {
-            --bg-gradient: linear-gradient(180deg, #4a0612 0%, #200107 100%);
-            --gold-premium: #d4af37;
-            --gold-light: #f3e5ab;
-            --cream-envelope: #f5ebd9;
-            --wax-red: #8b0000;
-            --text-white: #ffffff;
+            --primary: #ff4757;
+            --secondary: #ffa502;
+            --success: #2ed573;
+            --dark: #0a0813;
+            --card-bg: rgba(255, 255, 255, 0.07);
+            --border: rgba(255, 255, 255, 0.15);
+            --gradient: linear-gradient(135deg, #ff416c, #ff4b2b);
         }
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Poppins', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background: var(--bg-gradient);
-            color: var(--text-white);
+            background-color: var(--dark);
+            color: #ffffff;
             min-height: 100vh;
             overflow-x: hidden;
-        }
-
-        /* State Control */
-        .view-section {
-            display: none;
-            min-height: 100vh;
-            width: 100%;
-            padding: 40px 20px;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
             position: relative;
-            animation: fadeIn 0.8s ease forwards;
         }
 
-        .view-section.active {
+        /* Custom Scrollbar biar kece */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        /* ==========================================================================
+           2. CONFETTI BACKGROUND ENGINE (CSS Particle Animation)
+           ========================================================================== */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            top: -20px;
+            border-radius: 3px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Varying paths for realistic falling effect */
+        .p-1  { animation-duration: 4s; animation-delay: 0.2s; background: #ff4757; left: 5%; }
+        .p-2  { animation-duration: 5s; animation-delay: 1.5s; background: #2ed573; left: 15%; width: 12px; height: 12px; }
+        .p-3  { animation-duration: 3.5s; animation-delay: 0.7s; background: #1e90ff; left: 25%; }
+        .p-4  { animation-duration: 6s; animation-delay: 2.1s; background: #ffa502; left: 35%; border-radius: 50%; }
+        .p-5  { animation-duration: 4.5s; animation-delay: 0s; background: #9b59b6; left: 45%; }
+        .p-6  { animation-duration: 5.2s; animation-delay: 3s; background: #ff6b81; left: 55%; width: 8px; height: 15px; }
+        .p-7  { animation-duration: 3.8s; animation-delay: 1.2s; background: #7bed9f; left: 65%; }
+        .p-8  { animation-duration: 5.7s; animation-delay: 0.5s; background: #70a1ff; left: 75%; border-radius: 50%; }
+        .p-9  { animation-duration: 4.2s; animation-delay: 2.5s; background: #eccc68; left: 85%; }
+        .p-10 { animation-duration: 4.9s; animation-delay: 1.8s; background: #ff7f50; left: 95%; }
+
+        /* ==========================================================================
+           3. NAVIGATION SYSTEM (Single Page Application Layout)
+           ========================================================================== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 8, 19, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
             display: flex;
+            justify-content: center;
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            gap: 15px;
+            max-width: 900px;
+            width: 90%;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 5px;
+        }
+
+        /* Hide horizontal scrollbar on nav */
+        .nav-container::-webkit-scrollbar { display: none; }
+
+        .nav-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: #ccc;
+            padding: 8px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn.active, .nav-btn:hover {
+            background: var(--gradient);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(255, 65, 108, 0.4);
+        }
+
+        /* ==========================================================================
+           4. MAIN CONTENT WRAPPER
+           ========================================================================== */
+        main {
+            margin-top: 90px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 90px);
+            position: relative;
+            z-index: 10;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 850px;
+        }
+
+        .tab-panel {
+            display: none;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .tab-panel.active {
+            display: block;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Typography Global Replications */
-        .script-title {
-            font-family: 'Pinyon Script', cursive;
-            font-size: clamp(3rem, 8vw, 5.5rem);
-            color: var(--gold-light);
+        /* Shared Typography Components */
+        .section-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 3rem;
+            background: linear-gradient(45deg, #ff4757, #ffa502);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
             text-align: center;
-            margin-bottom: 10px;
-            text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
         }
 
-        .sub-title {
+        .subtitle {
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 30px;
             font-size: 1.1rem;
-            letter-spacing: 3px;
+        }
+
+        /* ==========================================================================
+           5. SECTION: HOME (The Welcome Greeting & Countdown)
+           ========================================================================== */
+        .welcome-box {
+            text-align: center;
+        }
+
+        .glitch-text {
+            font-size: 4rem;
+            font-weight: 800;
             text-transform: uppercase;
-            font-weight: 300;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 40px;
+            letter-spacing: -2px;
+            line-height: 1;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255,71,87,0.5);
         }
 
-        /* --- SCREEN 1: PRESS THE ENVELOPE --- */
-        #screen-envelope {
-            background: var(--bg-gradient);
-        }
-
-        .envelope-container {
-            position: relative;
-            width: 280px;
-            height: 180px;
-            background: var(--cream-envelope);
-            border-radius: 4px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            cursor: pointer;
-            margin-top: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .envelope-container:hover {
-            transform: scale(1.03);
-        }
-
-        /* Fake triangle folds for 2D realistic envelope look */
-        .envelope-container::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 0; height: 0;
-            border-left: 140px solid transparent;
-            border-right: 140px solid transparent;
-            border-top: 100px solid rgba(0,0,0,0.08);
-            z-index: 2;
-        }
-
-        .wax-seal {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 55px; height: 55px;
-            background: var(--wax-red);
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 0 10px rgba(0,0,0,0.4);
-            z-index: 3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .wax-seal i {
-            color: var(--gold-premium);
-            font-size: 1.2rem;
-        }
-
-        /* --- SCREEN 2: ENVELOPE OPENED WITH POPUP PHOTOS --- */
-        .opened-envelope-box {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            height: 420px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .main-card {
-            width: 240px;
-            height: 160px;
-            background: #ffffff;
-            color: #000;
+        .highlight-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--primary);
             padding: 20px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border-radius: 2px;
-            z-index: 5;
+            border-radius: 0 16px 16px 0;
+            margin: 25px 0;
+            text-align: left;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Live Digital Dashboard Clock / Counter */
+        .dashboard-timer {
             display: flex;
-            flex-direction: column;
             justify-content: center;
-            align-items: center;
+            gap: 15px;
+            margin-top: 35px;
         }
 
-        .main-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            color: #333;
+        .time-node {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 14px;
+            min-width: 80px;
         }
 
-        .main-card p {
-            font-size: 0.8rem;
-            color: #777;
-            margin-top: 5px;
-        }
-
-        /* Floating Polaroid Replications */
-        .floating-photo {
-            position: absolute;
-            width: 100px;
-            background: white;
-            padding: 6px 6px 18px 6px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-            border-radius: 2px;
-            z-index: 4;
-            transition: transform 0.3s;
-        }
-
-        .floating-photo img {
-            width: 100%;
-            height: 85px;
-            object-fit: cover;
-        }
-
-        .p1 { top: 20px; left: 20px; transform: rotate(-15deg); }
-        .p2 { top: 15px; right: 20px; transform: rotate(12deg); }
-        .p3 { bottom: 40px; left: 30px; transform: rotate(-8deg); }
-        .p4 { bottom: 35px; right: 30px; transform: rotate(15deg); }
-
-        /* Decors matching the video */
-        .decor-item {
-            position: absolute;
+        .time-node span {
+            display: block;
             font-size: 1.8rem;
-            z-index: 6;
-            pointer-events: none;
+            font-weight: bold;
+            color: var(--secondary);
         }
-        .dec-rose { bottom: 120px; left: 45%; color: #c1272d; }
-        .dec-butterfly { top: 140px; left: 60px; color: #ff6b6b; font-size: 1.3rem; }
 
-        .btn-surprise {
-            margin-top: 30px;
-            background: transparent;
-            border: 2px solid var(--gold-premium);
-            color: var(--gold-light);
-            padding: 12px 35px;
-            border-radius: 30px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            cursor: pointer;
+        .time-node label {
+            font-size: 0.75rem;
             text-transform: uppercase;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+            color: #888;
+            letter-spacing: 1px;
         }
 
-        .btn-surprise:hover {
-            background: var(--gold-premium);
-            color: #000;
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
-        }
-
-        /* --- SCREEN 3: CHOOSE THE SURPRISE MENU --- */
-        .menu-container {
-            width: 100%;
-            max-width: 400px;
+        /* ==========================================================================
+           6. SECTION: THE MEGAGAME (Catching Gifts Canvas Arcade)
+           ========================================================================== */
+        .game-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .menu-item {
-            display: flex;
             align-items: center;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 16px 25px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .menu-item:hover {
-            background: rgba(212, 175, 55, 0.15);
-            border-color: var(--gold-premium);
-            transform: translateY(-3px);
+        #gameCanvas {
+            background: #111;
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            max-width: 100%;
+            cursor: none;
         }
 
-        .menu-icon {
-            font-size: 1.8rem;
-            color: var(--gold-premium);
-            width: 50px;
-            text-align: center;
-            margin-right: 20px;
+        .game-controls {
+            margin-top: 15px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            width: 100%;
+            justify-content: space-between;
         }
 
-        .menu-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            letter-spacing: 1px;
-            color: var(--text-white);
+        .score-board {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--success);
         }
 
-        /* Back Button Replications */
-        .btn-back {
-            position: absolute;
-            bottom: 40px;
-            background: #2b9348; /* Warna hijau khas tombol BACK di video */
+        .action-btn {
+            background: var(--gradient);
             color: white;
             border: none;
             padding: 10px 24px;
-            border-radius: 20px;
-            font-weight: 600;
+            border-radius: 50px;
+            font-weight: bold;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(255, 65, 108, 0.3);
             transition: transform 0.2s;
         }
 
-        .btn-back:hover {
+        .action-btn:hover {
             transform: scale(1.05);
         }
 
-        /* --- SCREEN 4: JOURNEY VIEW (PHOTO COLLAGE) --- */
-        .collage-wrapper {
-            width: 100%;
-            max-width: 450px;
+        /* ==========================================================================
+           7. SECTION: CRYPTIC CAKE (3D Interactive CSS Candle blowing)
+           ========================================================================== */
+        .cake-stage {
+            height: 300px;
             display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 60px;
-        }
-
-        .collage-row {
-            width: 100%;
-            height: 130px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-            border: 2px solid rgba(255,255,255,0.1);
-        }
-
-        .collage-row img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .floating-planet {
-            position: absolute;
-            top: 40px; right: 30px;
-            font-size: 2rem;
-            color: rgba(255,255,255,0.2);
-            animation: spin 20s infinite linear;
-        }
-
-        /* --- SCREEN 5: MOMENT VIEW (LETTER & GOLD FRAME) --- */
-        .letter-paper {
-            background: #fdfdfd;
-            color: #2b2b2b;
-            padding: 30px;
-            border-radius: 4px;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.05), 0 10px 25px rgba(0,0,0,0.5);
-            margin-bottom: 25px;
+            justify-content: center;
+            align-items: flex-end;
             position: relative;
+            margin-bottom: 40px;
         }
 
-        .letter-paper::before {
-            content: '';
+        .css-cake {
+            position: relative;
+            width: 250px;
+            height: 120px;
+            background: #6c5ce7;
+            border-radius: 120px / 40px;
+            box-shadow: 0 10px 0 #5b4cc4, 0 15px 20px rgba(0,0,0,0.5);
+        }
+
+        .css-cake::before {
+            content: "";
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
-            background-size: 100% 24px;
+            top: 20px;
+            left: 0;
+            width: 250px;
+            height: 100px;
+            background: #a29bfe;
+            border-radius: 120px / 40px;
+            z-index: 2;
+        }
+
+        .css-cake::after {
+            content: "";
+            position: absolute;
+            top: 45px;
+            left: 0;
+            width: 250px;
+            height: 30px;
+            background: #ff7675;
+            z-index: 3;
+            border-radius: 120px / 20px;
+        }
+
+        /* Multiple Interactive Candles */
+        .candle-cluster {
+            position: absolute;
+            top: -50px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            z-index: 10;
+        }
+
+        .mini-candle {
+            width: 12px;
+            height: 60px;
+            background: linear-gradient(to right, #00cec9, #81ecec);
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .mini-candle:nth-child(even) {
+            background: linear-gradient(to right, #fdcb6e, #ffeaa7);
+        }
+
+        .wick-flame {
+            width: 10px;
+            height: 18px;
+            background: #ff7675;
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            top: -16px;
+            left: 1px;
+            box-shadow: 0 0 15px #ff7675, 0 0 25px #ff7675;
+            animation: wave 0.15s infinite alternate;
+            transition: all 0.2s ease;
+        }
+
+        @keyframes wave {
+            0% { transform: scale(1) rotate(-2deg); background: #ff7675; }
+            100% { transform: scale(1.15) rotate(2deg); background: #fdcb6e; }
+        }
+
+        .mini-candle.extinguished .wick-flame {
+            opacity: 0;
+            transform: scale(0);
             pointer-events: none;
         }
 
-        .letter-paper h4 {
-            font-family: 'Pinyon Script', cursive;
-            font-size: 2.5rem;
-            color: #8b0000;
-            margin-bottom: 10px;
+        /* ==========================================================================
+           8. SECTION: DIGITAL WISH WALL (LocalStorage Post-It Board)
+           ========================================================================== */
+        .wish-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
         }
 
-        .letter-paper p {
-            font-size: 0.9rem;
-            line-height: 1.6;
-            text-align: justify;
+        .wish-input {
+            flex: 1;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border);
+            padding: 12px 20px;
+            border-radius: 50px;
+            color: #fff;
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.3s;
         }
 
-        .gold-frame-box {
+        .wish-input:focus {
+            border-color: var(--primary);
+        }
+
+        .board-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            max-height: 350px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .note-card {
+            background: #ffeaa7;
+            color: #2d3436;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.15);
+            transform: rotate(-1.5deg);
+            transition: transform 0.2s;
+            position: relative;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .note-card:nth-child(even) {
+            background: #fab1a0;
+            transform: rotate(2deg);
+        }
+
+        .note-card:nth-child(3n) {
+            background: #81ecec;
+            transform: rotate(-2.5deg);
+        }
+
+        .note-card p {
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 1.4;
+            word-break: break-word;
+        }
+
+        .note-date {
+            font-size: 0.7rem;
+            color: #636e72;
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        /* ==========================================================================
+           9. SECTION: MUSIC BOX SIMULATOR (Aesthetic Visualizer Node)
+           ========================================================================== */
+        .audio-deck {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .vinyl-record {
             width: 180px;
             height: 180px;
-            border: 6px double var(--gold-premium);
-            padding: 4px;
-            background: #000;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-            margin-bottom: 60px;
-        }
-
-        .gold-frame-box img {
-            width: 100%; height: 100%; object-fit: cover;
-        }
-
-        /* --- SCREEN 6: PLAYLIST VIEW (RETRO PLAYER UI) --- */
-        .player-mockup {
-            width: 100%;
-            max-width: 420px;
-            background: #151515;
-            border: 3px solid #333;
-            border-radius: 12px;
-            padding: 15px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
-            margin-bottom: 60px;
-        }
-
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            background: #000;
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border: none;
-        }
-
-        .player-decors {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 12px;
-            color: #666;
-            font-size: 0.8rem;
-        }
-
-        /* --- SCREEN 7: GIFT / BONUS VIEW --- */
-        .gift-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--gold-premium);
-            border-radius: 16px;
-            padding: 30px;
-            text-align: center;
-            max-width: 400px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-        }
-
-        /* Float Music Controls */
-        #music-control {
-            position: fixed;
-            top: 20px; right: 20px;
-            width: 45px; height: 45px;
+            background: radial-gradient(circle, #222 30%, #111 31%, #111 60%, #333 61%, #111 70%);
             border-radius: 50%;
-            background: rgba(0,0,0,0.6);
-            border: 1px solid var(--gold-premium);
-            color: var(--gold-premium);
-            display: flex; align-items: center; justify-content: center;
-            z-index: 1000; cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            animation: spin 4s linear infinite;
+            animation-play-state: paused;
         }
 
-        @keyframes spin { from {transform: rotate(0deg);} to {transform: rotate(360deg);} }
+        .vinyl-record.playing {
+            animation-play-state: running;
+        }
+
+        .vinyl-center {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 4px solid #fff;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        .visualizer-rack {
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            height: 60px;
+            margin-top: 40px;
+            width: 200px;
+        }
+
+        .bar {
+            flex: 1;
+            height: 5px;
+            background: var(--primary);
+            border-radius: 4px 4px 0 0;
+            transition: height 0.1s ease;
+        }
+
+        /* Mobile Responsive adjustments */
+        @media (max-width: 600px) {
+            .glitch-text { font-size: 2.5rem; }
+            .section-title { font-size: 2.2rem; }
+            .tab-panel { padding: 25px 15px; }
+            .dashboard-timer { flex-wrap: wrap; }
+        }
     </style>
 </head>
 <body>
 
-    <audio id="romantic-bgm" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
-    </audio>
-
-    <div id="music-control" onclick="toggleMusic()">
-        <i id="music-icon" class="fas fa-music"></i>
+    <!-- CSS Particles -->
+    <div class="confetti-container">
+        <div class="particle p-1"></div><div class="particle p-2"></div>
+        <div class="particle p-3"></div><div class="particle p-4"></div>
+        <div class="particle p-5"></div><div class="particle p-6"></div>
+        <div class="particle p-7"></div><div class="particle p-8"></div>
+        <div class="particle p-9"></div><div class="particle p-10"></div>
     </div>
 
-    <section id="screen-envelope" class="view-section active">
-        <h1 class="script-title">Press the Envelope</h1>
-        <p class="sub-title">tap to lanjut</p>
-        
-        <div class="envelope-container" onclick="openEnvelope()">
-            <div class="wax-seal">
-                <i class="fas fa-heart"></i>
-            </div>
+    <!-- Navigation Bar Hub -->
+    <nav>
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="switchTab('home')">🏠 Main Deck</button>
+            <button class="nav-btn" onclick="switchTab('cake')">🎂 Blow Candle</button>
+            <button class="nav-btn" onclick="switchTab('game')">🎮 Catch Arcade</button>
+            <button class="nav-btn" onclick="switchTab('wish')">📝 Wish Board</button>
+            <button class="nav-btn" onclick="switchTab('music')">🎵 Chill Vibes</button>
         </div>
-    </section>
+    </nav>
 
-    <section id="screen-opened" class="view-section">
-        <div class="opened-envelope-box">
-            <div class="floating-photo p1"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200" alt="Foto 1"></div>
-            <div class="floating-photo p2"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200" alt="Foto 2"></div>
-            <div class="floating-photo p3"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200" alt="Foto 3"></div>
-            <div class="floating-photo p4"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200" alt="Foto 4"></div>
-            
-            <div class="decor-item dec-rose"><i class="fas fa-rose"></i>🌹</div>
-            <div class="decor-item dec-butterfly"><i class="fas fa-butterfly"></i>🦋</div>
+    <!-- Main Dynamic Application Screen -->
+    <main>
+        <div class="app-container">
 
-            <div class="main-card">
-                <h3>Happy Birthday</h3>
-                <p>01-01-2026</p>
+            <!-- TAB 1: HOME PAGE -->
+            <div id="panel-home" class="tab-panel active">
+                <div class="welcome-box">
+                    <div class="glitch-text">Happy Birthday!</div>
+                    <h2 style="color: var(--secondary); font-family: 'Pacifico', cursive; font-size: 2rem;">Level Up Day! 🎉</h2>
+                    
+                    <div class="highlight-box">
+                        Yo bro/sist! Welcome to your special digital space. Gak kerasa ya circle orbit bumi lu udah nambah lagi aja. Hari ini lu resmi dapet upgrade status life experience baru. 
+                        <br><br>
+                        Gue sengaja bikin custom system ini eksklusif buat ngerayain <strong>Happy Birthday</strong> lu dengan cara yang beda. Gak usah buru-buru, *feel free* buat keliling, eksplor, main game, dan nikmatin vibes interaktif yang ada di sini. *Enjoy your awesome day to the absolute fullest!* 🍻🔥
+                    </div>
+
+                    <div class="dashboard-timer">
+                        <div class="time-node"><span id="days-box">00</span><label>Days</label></div>
+                        <div class="time-node"><span id="hours-box">00</span><label>Hours</label></div>
+                        <div class="time-node"><span id="mins-box">00</span><label>Mins</label></div>
+                        <div class="time-node"><span id="secs-box">00</span><label>Secs</label></div>
+                    </div>
+                    <p style="margin-top: 10px; font-size: 0.8rem; color: #666;">Time elapsed since you entered this celebration deck</p>
+                </div>
             </div>
-        </div>
 
-        <button class="btn-surprise" onclick="goToMenu()">Tap For Surprise</button>
-    </section>
-
-    <section id="screen-menu" class="view-section">
-        <h1 class="script-title">Choose the Surprise</h1>
-        
-        <div class="menu-container">
-            <div class="menu-item" onclick="navigateView('screen-journey')">
-                <div class="menu-icon"><i class="fas fa-camera"></i></div>
-                <div class="menu-text">Journey</div>
-            </div>
-            <div class="menu-item" onclick="navigateView('screen-moment')">
-                <div class="menu-icon"><i class="fas fa-clock"></i></div>
-                <div class="menu-text">Moment</div>
-            </div>
-            <div class="menu-item" onclick="navigateView('screen-playlist')">
-                <div class="menu-icon"><i class="fas fa-compact-disc"></i></div>
-                <div class="menu-text">Playlist</div>
-            </div>
-            <div class="menu-item" onclick="navigateView('screen-gift')">
-                <div class="menu-icon"><i class="fas fa-gift"></i></div>
-                <div class="menu-text">Gift</div>
-            </div>
-        </div>
-    </section>
-
-    <section id="screen-journey" class="view-section">
-        <i class="fas fa-satellite-dish floating-planet"></i>
-        <h1 class="script-title">Our Journey</h1>
-        <p class="sub-title" style="margin-bottom:20px;">Bersama Teman & Sahabat</p>
-
-        <div class="collage-wrapper">
-            <div class="collage-row"><img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=500" alt="Group 1"></div>
-            <div class="collage-row"><img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=500" alt="Group 2"></div>
-            <div class="collage-row"><img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?q=80&w=500" alt="Group 3"></div>
-        </div>
-
-        <button class="btn-back" onclick="navigateView('screen-menu')"><i class="fas fa-arrow-left"></i> BACK</button>
-    </section>
-
-    <section id="screen-moment" class="view-section">
-        <div class="letter-paper">
-            <h4>My Love</h4>
-            <p>Happy Birthday! With you, even the simplest days feel incredibly special. Thank you for filling my life with so much light and endless love. Wishing you the happiest year yet, my constant, my everything.</p>
-        </div>
-
-        <div class="gold-frame-box">
-            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=300" alt="Framed Photo">
-        </div>
-
-        <button class="btn-back" onclick="navigateView('screen-menu')"><i class="fas fa-arrow-left"></i> BACK</button>
-    </section>
-
-    <section id="screen-playlist" class="view-section">
-        <h1 class="script-title">Special Playlist</h1>
-        <p class="sub-title" style="margin-bottom:20px;">Anugerah Terindah - Andmesh</p>
-
-        <div class="player-mockup">
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/P_X7MTo7O8s?enablejsapi=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </div>
-            <div class="player-decors">
-                <span><i class="fas fa-sliders-h"></i> EQ ACTIVE</span>
-                <span>1080p HD <i class="fas fa-wifi"></i></span>
-            </div>
-        </div>
-
-        <button class="btn-back" onclick="navigateView('screen-menu')"><i class="fas fa-arrow-left"></i> BACK</button>
-    </section>
-
-    <section id="screen-gift" class="view-section">
-        <h1 class="script-title">A Special Wish</h1>
-        
-        <div class="gift-card">
-            <i class="fas fa-birthday-cake" style="font-size: 3rem; color: var(--gold-premium); margin-bottom: 15px;"></i>
-            <p style="line-height:1.6;">Semoga di umur yang ke-17 ini, Intan menjadi pribadi yang semakin dewasa, dipermudah jalannya dalam meraih cita-cita, dan selalu bahagia bersamaku. ❤️</p>
-        </div>
-
-        <button class="btn-back" onclick="navigateView('screen-menu')"><i class="fas fa-arrow-left"></i> BACK</button>
-    </section>
-
-    <script>
-        const bgm = document.getElementById('romantic-bgm');
-
-        // Fungsi Membuka Amplop Utama & memicu Audio agar tidak diblokir browser
-        function openEnvelope() {
-            bgm.play().catch(e => console.log("Audio autoplay diblokir, dimainkan setelah interaksi lanjutan."));
-            navigateView('screen-opened');
-            triggerConfetti();
-        }
-
-        function goToMenu() {
-            navigateView('screen-menu');
-        }
-
-        // Manajemen navigasi antar view screen
-        function navigateView(targetId) {
-            // Sembunyikan semua section
-            document.querySelectorAll('.view-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            // Tampilkan section target
-            const target = document.getElementById(targetId);
-            if(target) {
-                target.classList.add('active');
-                window.scrollTo(0,0);
-            }
-        }
-
-        // Kontrol Musik Hidup/Mati
-        function toggleMusic() {
-            const icon = document.getElementById('music-icon');
-            if (bgm.paused) {
-                bgm.play();
-                icon.className = 'fas fa-music';
-            } else {
-                bgm.p
+            <!-- TAB 2: INTERACTIVE CAKE CREATION -->
+            <div id="panel-cake" class="tab-panel">
+                <h2 class="section-title">Blow The Magic</h2>
+                <p class="subtitle">Klik atau ketuk apinya satu-satu buat niup lilin secara virtual! 🕯️✨</p>
+                
+                <div class="cake-stage">
+                    <div class="css-cake">
+                        <div class="candle-cluster">
+                            <div class="mini-candle" onclick="extinguish(this)"><div class="wick-flame"></div></div>
+                            <div class="mini-candle" onclick="extinguish(this)"><div class="wick-flame"></div></div>
+                            <div class="mini-candle" 
