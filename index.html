@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy 17th Birthday, Intan ✨</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- RESET & BASE STYLES --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle, #4a0e17 0%, #2b0414 50%, #120108 100%);
+      color: #fcf8f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Vignette Overlay for Depth */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, transparent 40%, rgba(0, 0, 0, 0.7) 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* --- BACKGROUND ANIMATIONS --- */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .bokeh-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .bokeh {
+      position: absolute;
+      background: radial-gradient(circle, rgba(255, 183, 197, 0.2) 0%, rgba(183, 110, 121, 0) 70%);
+      border-radius: 50%;
+      filter: blur(20px);
+      animation: floatBokeh 15s infinite ease-in-out;
+    }
+
+    @keyframes floatBokeh {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
+      50% { transform: translateY(-50px) scale(1.2); opacity: 0.6; }
+    }
+
+    /* --- TOP LEFT CLOCK --- */
+    .top-left-datetime {
+      position: fixed;
+      top: 25px;
+      left: 25px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      color: rgba(255, 183, 197, 0.8);
+      letter-spacing: 2px;
+      z-index: 10;
+      font-weight: 500;
+      backdrop-filter: blur(5px);
+      padding: 5px 10px;
+      border-radius: 5px;
+      background: rgba(43, 4, 20, 0.2);
+      border-left: 1px solid rgba(255, 183, 197, 0.3);
+    }
+
+    /* --- MAIN HERO WRAPPER --- */
+    .main-container {
+      width: 100%;
+      max-width: 1200px;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 5;
+      animation: fadeInPage 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    /* --- GLASSMORPHISM CARD --- */
+    .glass-card {
+      background: rgba(43, 4, 20, 0.45);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 183, 197, 0.18);
+      border-radius: 24px;
+      padding: 60px 40px;
+      width: 100%;
+      max-width: 680px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 
+                  inset 0 0 20px rgba(255, 183, 197, 0.05);
+      transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 183, 197, 0.3);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 
+                  0 0 30px rgba(255, 183, 197, 0.1);
+    }
+
+    /* Sakura Icons Decoration */
+    .sakura-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .sakura-icons svg {
+      width: 24px;
+      height: 24px;
+      fill: #ffb7c5;
+      filter: drop-shadow(0 0 5px rgba(255, 183, 197, 0.6));
+      animation: pulseIcon 3s infinite ease-in-out;
+    }
+
+    .sakura-icons svg:nth-child(2) { animation-delay: 0.5s; }
+    .sakura-icons svg:nth-child(3) { animation-delay: 1s; }
+
+    @keyframes pulseIcon {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+
+    /* Typography inside Card */
+    .sub-cursive {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: #b76e79; /* Rose Gold */
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+
+    .main-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #fcf8f2;
+      margin-bottom: 30px;
+      text-shadow: 0 0 15px rgba(255, 183, 197, 0.35);
+    }
+
+    .main-heading span.highlight {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: #ffb7c5; /* Pink Pastel */
+      font-weight: 400;
+      text-shadow: 0 0 20px rgba(255, 183, 197, 0.5);
+    }
+
+    .romantic-letter {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.98rem;
+      line-height: 1.8;
+      color: rgba(252, 248, 242, 0.85);
+      font-weight: 300;
+      margin-bottom: 35px;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    .signature {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.3rem;
+      color: #ffb7c5;
+      letter-spacing: 1px;
+    }
+
+    /* --- MINI MUSIC PLAYER --- */
+    .music-player {
+      position: fixed;
+      bottom: 25px;
+      left: 25px;
+      background: rgba(26, 2, 11, 0.65);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 183, 197, 0.15);
+      padding: 12px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 280px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      z-index: 10;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .music-player:hover {
+      transform: scale(1.02);
+      border-color: rgba(255, 183, 197, 0.3);
+    }
+
+    .album-cover {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      background: linear-gradient(45deg, #4a0e17, #ffb7c5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      position: relative;
+    }
+
+    .album-cover::before {
+      content: '🎵';
+      font-size: 1.5rem;
+    }
+
+    .track-info {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .track-name {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #fcf8f2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 150px;
+    }
+
+    .artist-name {
+      font-size: 0.75rem;
+      color: #b76e79;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      margin-top: 5px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: #ffb7c5;
+      border-radius: 2px;
+      transition: width 0.1s linear;
+    }
+
+    .btn-play-pause {
+      background: #ffb7c5;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(255, 183, 197, 0.4);
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .btn-play-pause:hover {
+      transform: scale(1.1);
+      background: #fcf8f2;
+    }
+
+    .btn-play-pause svg {
+      width: 14px;
+      height: 14px;
+      fill: #2b0414;
+    }
+
+    /* --- PAGE ANIMATIONS --- */
+    @keyframes fadeInPage {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Autoplay Prompt Overlay (Crucial for Modern Browsers) */
+    .interaction-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(18, 1, 8, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .interaction-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(1.05);
+    }
+
+    .enter-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 183, 197, 0.5);
+      color: #ffb7c5;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      padding: 12px 35px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      box-shadow: 0 0 15px rgba(255, 183, 197, 0.1);
+    }
+
+    .enter-btn:hover {
+      background: #ffb7c5;
+      color: #2b0414;
+      box-shadow: 0 0 25px rgba(255, 183, 197, 0.4);
+    }
+
+    /* --- RESPONSIVE DESIGN --- */
+    @media (max-width: 768px) {
+      .glass-card {
+        padding: 40px 25px;
+        margin: 20px;
+      }
+      .main-heading {
+        font-size: 2rem;
+      }
+      .romantic-letter {
+        font-size: 0.9rem;
+        line-height: 1.7;
+      }
+      .top-left-datetime {
+        top: 15px;
+        left: 15px;
+        font-size: 0.8rem;
+      }
+      .music-player {
+        bottom: 15px;
+        left: 15px;
+        right: 15px;
+        width: calc(100% - 30px);
+      }
+      body, html {
+        align-items: flex-start;
+        overflow-y: auto;
+      }
+      .main-container {
+        padding-top: 80px;
+        padding-bottom: 110px; /* Space for absolute player */
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="interaction-overlay" id="overlay">
+    <button class="enter-btn" onclick="initPage()">Open Invitation 🌹</button>
+  </div>
+
+  <canvas id="sakuraCanvas"></canvas>
+
+  <div class="bokeh-container" id="bokehContainer"></div>
+
+  <div class="top-left-datetime" id="liveDateTime">Loading...</div>
+
+  <div class="main-container">
+    <main class="glass-card">
+      
+      <div class="sakura-icons">
+        <svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6Z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6Z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6Z"/></svg>
+      </div>
+
+      <p class="sub-cursive">from the bottom of my heart</p>
+      
+      <h1 class="main-heading">
+        Today is the day <span class="highlight">the world became</span> more beautiful.
+      </h1>
+
+      <p class="romantic-letter">
+        Selamat ulang tahun yang ke-17, Intan. Hari ini bukan sekadar pergantian angka, melainkan sebuah perayaan penuh syukur atas hadirnya jiwa paling indah yang pernah kukenal di bumi ini. Di momen <i>Sweet Seventeen</i> ini, semesta seolah ikut tersenyum merayakan kedewasaanmu yang mulai mekar dengan begitu anggun. Terima kasih telah menjadi bagian paling menenangkan di tengah bisingnya dunia, menjadi warna paling lembut dalam setiap hariku, dan melengkapi hidup ini dengan ketulusanmu. Bersamamu, waktu terasa berjalan lebih lambat namun berharga. Semoga langkahmu ke depan selalu dipenuhi kebahagiaan, kehangatan, dan cinta yang tak pernah habis. 
+      </p>
+
+      <div class="signature">- Yours, always & forever 🌹</div>
+    </main>
+  </div>
+
+  <div class="music-player">
+    <div class="album-cover">
+      </div>
+    <div class="track-info">
+      <div class="track-name">Until I Found You</div>
+      <div class="artist-name">Stephen Sanchez</div>
+      <div class="progress-container" id="progressContainer">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <button class="btn-play-pause" id="playBtn">
+      <svg id="playIcon" viewBox="0 0 24 24"><path d="M8,5V19L19,12L8,5Z"/></svg>
+    </button>
+  </div>
+
+  <audio id="romanticAudio" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    // --- 1. GLOBAL INTERACTION AND AUTOPLAY BYPASS ---
+    const audio = document.getElementById('romanticAudio');
+    const playBtn = document.getElementById('playBtn');
+    const playIcon = document.getElementById('playIcon');
+    const progressBar = document.getElementById('progressBar');
+    const progressContainer = document.getElementById('progressContainer');
+    let isPlaying = false;
+
+    function initPage() {
+      document.getElementById('overlay').classList.add('hidden');
+      togglePlay();
+    }
+
+    function togglePlay() {
+      if (isPlaying) {
+        audio.pause();
+        playIcon.innerHTML = '<path d="M8,5V19L19,12L8,5Z"/>'; // Play icon
+      } else {
+        audio.play().catch(err => console.log("Playback interaction bypass handled."));
+        playIcon.innerHTML = '<path d="M14,19H18V5H14M6,19H10V5H6V19Z"/>'; // Pause icon
+      }
+      isPlaying = !isPlaying;
+    }
+
+    playBtn.addEventListener('click', togglePlay);
+
+    // Sync Audio Progress Line
+    audio.addEventListener('timeupdate', () => {
+      const percentage = (audio.currentTime / audio.duration) * 100;
+      progressBar.style.width = percentage + '%';
+    });
+
+    progressContainer.addEventListener('click', (e) => {
+      const coordX = e.offsetX;
+      const totalWidth = progressContainer.clientWidth;
+      const clickPercent = (coordX / totalWidth);
+      audio.currentTime = clickPercent * audio.duration;
+    });
+
+
+    // --- 2. LIVE CLOCK & DATE LOGIC ---
+    function updateDateTime() {
+      const now = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const dateString = now.toLocaleDateString('id-ID', options);
+      const timeString = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      
+      document.getElementById('liveDateTime').innerText = `${dateString} • ${timeString}`;
+    }
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+
+
+    // --- 3. BOKEH BLUR FLOATING PARTICLES ---
+    const bokehContainer = document.getElementById('bokehContainer');
+    const maxBokeh = 12;
+
+    for (let i = 0; i < maxBokeh; i++) {
+      const bokeh = document.createElement('div');
+      bokeh.classList.add('bokeh');
+      
+      const size = Math.random() * 150 + 80;
+      bokeh.style.width = size + 'px';
+      bokeh.style.height = size + 'px';
+      
+      bokeh.style.top = Math.random() * 100 + 'vh';
+      bokeh.style.left = Math.random() * 100 + 'vw';
+      
+      bokeh.style.animationDelay = (Math.random() * 8) + 's';
+      bokeh.style.animationDuration = (Math.random() * 10 + 10) + 's';
+      
+      bokehContainer.appendChild(bokeh);
+    }
+
+
+    // --- 4. SAKURA CANVAS FALLING ANIMATION ---
+    const canvas = document.getElementById('sakuraCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let arrPetals = [];
+    const totalPetals = 45;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class SakuraPetal {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height - canvas.height;
+        this.size = Math.random() * 8 + 6;
+        this.speedX = Math.random() * 1.5 - 0.5;
+        this.speedY = Math.random() * 1.2 + 0.8;
+        this.opacity = Math.random() * 0.4 + 0.5;
+        this.flip = Math.random();
+        this.flipSpeed = Math.random() * 0.03 + 0.01;
+      }
+
+      draw() {
+        if (this.y > canvas.height || this.x > canvas.width || this.x < -10) {
+          this.x = Math.random() * canvas.width;
+          this.y = -20;
+          this.speedX = Math.random() * 1.5 - 0.5;
+          this.speedY = Math.random() * 1.2 + 0.8;
+          this.flip = Math.random();
+        }
+
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.flip * Math.PI);
+        ctx.scale(this.flip, 1);
+        
+        ctx.beginPath();
+        // Drawing beautiful organic fluid sakura shape via custom curves
+        ctx.moveTo(0, 0);
+        ctx.bezierCurveTo(-this.size, -this.size/2, -this.size, this.size, 0, this.size * 1.5);
+        ctx.bezierCurveTo(this.size, this.size, this.size, -this.size/2, 0, 0);
+        
+        // Premium Pink Pastel Gradient for each blossom petal
+        const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size * 1.5);
+        grad.addColorStop(0, `rgba(255, 200, 212, ${this.opacity})`);
+        grad.addColorStop(1, `rgba(255, 183, 197, ${this.opacity * 0.4})`);
+        
+        ctx.fillStyle = grad;
+        ctx.fill();
+        ctx.restore();
+      }
+
+      update() {
+        this.x += this.speedX + Math.sin(this.y / 30) * 0.3;
+        this.y += this.speedY;
+        this.flip += this.flipSpeed;
+      }
+    }
+
+    function initSakura() {
+      for (let i = 0; i < totalPetals; i++) {
+        arrPetals.push(new SakuraPetal());
+      }
+    }
+
+    function animateSakura() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      arrPetals.forEach(petal => {
+        petal.update();
+        petal.draw();
+      });
+      requestAnimationFrame(animateSakura);
+    }
+
+    initSakura();
+    animateSakura();
+  </script>
+</body>
+  </html>
+  
