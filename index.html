@@ -1,611 +1,263 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy 17th Birthday, Intan ✨</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-
-  <style>
-    /* --- RESET & BASE STYLES --- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    body, html {
-      width: 100%;
-      height: 100%;
-      overflow-x: hidden;
-      font-family: 'Poppins', sans-serif;
-      background: radial-gradient(circle, #4a0e17 0%, #2b0414 50%, #120108 100%);
-      color: #fcf8f2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
-
-    /* Vignette Overlay for Depth */
-    body::after {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, transparent 40%, rgba(0, 0, 0, 0.7) 100%);
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    /* --- BACKGROUND ANIMATIONS --- */
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .bokeh-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .bokeh {
-      position: absolute;
-      background: radial-gradient(circle, rgba(255, 183, 197, 0.2) 0%, rgba(183, 110, 121, 0) 70%);
-      border-radius: 50%;
-      filter: blur(20px);
-      animation: floatBokeh 15s infinite ease-in-out;
-    }
-
-    @keyframes floatBokeh {
-      0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
-      50% { transform: translateY(-50px) scale(1.2); opacity: 0.6; }
-    }
-
-    /* --- TOP LEFT CLOCK --- */
-    .top-left-datetime {
-      position: fixed;
-      top: 25px;
-      left: 25px;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.95rem;
-      color: rgba(255, 183, 197, 0.8);
-      letter-spacing: 2px;
-      z-index: 10;
-      font-weight: 500;
-      backdrop-filter: blur(5px);
-      padding: 5px 10px;
-      border-radius: 5px;
-      background: rgba(43, 4, 20, 0.2);
-      border-left: 1px solid rgba(255, 183, 197, 0.3);
-    }
-
-    /* --- MAIN HERO WRAPPER --- */
-    .main-container {
-      width: 100%;
-      max-width: 1200px;
-      padding: 40px 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 5;
-      animation: fadeInPage 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-    }
-
-    /* --- GLASSMORPHISM CARD --- */
-    .glass-card {
-      background: rgba(43, 4, 20, 0.45);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 183, 197, 0.18);
-      border-radius: 24px;
-      padding: 60px 40px;
-      width: 100%;
-      max-width: 680px;
-      text-align: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 
-                  inset 0 0 20px rgba(255, 183, 197, 0.05);
-      transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
-    }
-
-    .glass-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(255, 183, 197, 0.3);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 
-                  0 0 30px rgba(255, 183, 197, 0.1);
-    }
-
-    /* Sakura Icons Decoration */
-    .sakura-icons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 25px;
-    }
-
-    .sakura-icons svg {
-      width: 24px;
-      height: 24px;
-      fill: #ffb7c5;
-      filter: drop-shadow(0 0 5px rgba(255, 183, 197, 0.6));
-      animation: pulseIcon 3s infinite ease-in-out;
-    }
-
-    .sakura-icons svg:nth-child(2) { animation-delay: 0.5s; }
-    .sakura-icons svg:nth-child(3) { animation-delay: 1s; }
-
-    @keyframes pulseIcon {
-      0%, 100% { transform: scale(1); opacity: 0.7; }
-      50% { transform: scale(1.15); opacity: 1; }
-    }
-
-    /* Typography inside Card */
-    .sub-cursive {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1.25rem;
-      color: #b76e79; /* Rose Gold */
-      letter-spacing: 1px;
-      margin-bottom: 15px;
-    }
-
-    .main-heading {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      font-weight: 700;
-      line-height: 1.2;
-      color: #fcf8f2;
-      margin-bottom: 30px;
-      text-shadow: 0 0 15px rgba(255, 183, 197, 0.35);
-    }
-
-    .main-heading span.highlight {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      color: #ffb7c5; /* Pink Pastel */
-      font-weight: 400;
-      text-shadow: 0 0 20px rgba(255, 183, 197, 0.5);
-    }
-
-    .romantic-letter {
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.98rem;
-      line-height: 1.8;
-      color: rgba(252, 248, 242, 0.85);
-      font-weight: 300;
-      margin-bottom: 35px;
-      text-align: center;
-      letter-spacing: 0.5px;
-    }
-
-    .signature {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1.3rem;
-      color: #ffb7c5;
-      letter-spacing: 1px;
-    }
-
-    /* --- MINI MUSIC PLAYER --- */
-    .music-player {
-      position: fixed;
-      bottom: 25px;
-      left: 25px;
-      background: rgba(26, 2, 11, 0.65);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 183, 197, 0.15);
-      padding: 12px;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 280px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-      z-index: 10;
-      transition: transform 0.3s ease, border-color 0.3s ease;
-    }
-
-    .music-player:hover {
-      transform: scale(1.02);
-      border-color: rgba(255, 183, 197, 0.3);
-    }
-
-    .album-cover {
-      width: 50px;
-      height: 50px;
-      border-radius: 10px;
-      background: linear-gradient(45deg, #4a0e17, #ffb7c5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      position: relative;
-    }
-
-    .album-cover::before {
-      content: '🎵';
-      font-size: 1.5rem;
-    }
-
-    .track-info {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .track-name {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: #fcf8f2;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 150px;
-    }
-
-    .artist-name {
-      font-size: 0.75rem;
-      color: #b76e79;
-    }
-
-    .progress-container {
-      width: 100%;
-      height: 4px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 2px;
-      margin-top: 5px;
-      position: relative;
-      cursor: pointer;
-    }
-
-    .progress-bar {
-      width: 0%;
-      height: 100%;
-      background: #ffb7c5;
-      border-radius: 2px;
-      transition: width 0.1s linear;
-    }
-
-    .btn-play-pause {
-      background: #ffb7c5;
-      border: none;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(255, 183, 197, 0.4);
-      transition: transform 0.2s ease, background-color 0.2s ease;
-    }
-
-    .btn-play-pause:hover {
-      transform: scale(1.1);
-      background: #fcf8f2;
-    }
-
-    .btn-play-pause svg {
-      width: 14px;
-      height: 14px;
-      fill: #2b0414;
-    }
-
-    /* --- PAGE ANIMATIONS --- */
-    @keyframes fadeInPage {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Autoplay Prompt Overlay (Crucial for Modern Browsers) */
-    .interaction-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(18, 1, 8, 0.85);
-      backdrop-filter: blur(10px);
-      z-index: 100;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .interaction-overlay.hidden {
-      opacity: 0;
-      pointer-events: none;
-      transform: scale(1.05);
-    }
-
-    .enter-btn {
-      background: transparent;
-      border: 1px solid rgba(255, 183, 197, 0.5);
-      color: #ffb7c5;
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1.4rem;
-      padding: 12px 35px;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: all 0.4s ease;
-      box-shadow: 0 0 15px rgba(255, 183, 197, 0.1);
-    }
-
-    .enter-btn:hover {
-      background: #ffb7c5;
-      color: #2b0414;
-      box-shadow: 0 0 25px rgba(255, 183, 197, 0.4);
-    }
-
-    /* --- RESPONSIVE DESIGN --- */
-    @media (max-width: 768px) {
-      .glass-card {
-        padding: 40px 25px;
-        margin: 20px;
-      }
-      .main-heading {
-        font-size: 2rem;
-      }
-      .romantic-letter {
-        font-size: 0.9rem;
-        line-height: 1.7;
-      }
-      .top-left-datetime {
-        top: 15px;
-        left: 15px;
-        font-size: 0.8rem;
-      }
-      .music-player {
-        bottom: 15px;
-        left: 15px;
-        right: 15px;
-        width: calc(100% - 30px);
-      }
-      body, html {
-        align-items: flex-start;
-        overflow-y: auto;
-      }
-      .main-container {
-        padding-top: 80px;
-        padding-bottom: 110px; /* Space for absolute player */
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <div class="interaction-overlay" id="overlay">
-    <button class="enter-btn" onclick="initPage()">Open Invitation 🌹</button>
-  </div>
-
-  <canvas id="sakuraCanvas"></canvas>
-
-  <div class="bokeh-container" id="bokehContainer"></div>
-
-  <div class="top-left-datetime" id="liveDateTime">Loading...</div>
-
-  <div class="main-container">
-    <main class="glass-card">
-      
-      <div class="sakura-icons">
-        <svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6Z"/></svg>
-        <svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6Z"/></svg>
-        <svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6Z"/></svg>
-      </div>
-
-      <p class="sub-cursive">from the bottom of my heart</p>
-      
-      <h1 class="main-heading">
-        Today is the day <span class="highlight">the world became</span> more beautiful.
-      </h1>
-
-      <p class="romantic-letter">
-        Selamat ulang tahun yang ke-17, Intan. Hari ini bukan sekadar pergantian angka, melainkan sebuah perayaan penuh syukur atas hadirnya jiwa paling indah yang pernah kukenal di bumi ini. Di momen <i>Sweet Seventeen</i> ini, semesta seolah ikut tersenyum merayakan kedewasaanmu yang mulai mekar dengan begitu anggun. Terima kasih telah menjadi bagian paling menenangkan di tengah bisingnya dunia, menjadi warna paling lembut dalam setiap hariku, dan melengkapi hidup ini dengan ketulusanmu. Bersamamu, waktu terasa berjalan lebih lambat namun berharga. Semoga langkahmu ke depan selalu dipenuhi kebahagiaan, kehangatan, dan cinta yang tak pernah habis. 
-      </p>
-
-      <div class="signature">- Yours, always & forever 🌹</div>
-    </main>
-  </div>
-
-  <div class="music-player">
-    <div class="album-cover">
-      </div>
-    <div class="track-info">
-      <div class="track-name">Until I Found You</div>
-      <div class="artist-name">Stephen Sanchez</div>
-      <div class="progress-container" id="progressContainer">
-        <div class="progress-bar" id="progressBar"></div>
-      </div>
-    </div>
-    <button class="btn-play-pause" id="playBtn">
-      <svg id="playIcon" viewBox="0 0 24 24"><path d="M8,5V19L19,12L8,5Z"/></svg>
-    </button>
-  </div>
-
-  <audio id="romanticAudio" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
-  </audio>
-
-  <script>
-    // --- 1. GLOBAL INTERACTION AND AUTOPLAY BYPASS ---
-    const audio = document.getElementById('romanticAudio');
-    const playBtn = document.getElementById('playBtn');
-    const playIcon = document.getElementById('playIcon');
-    const progressBar = document.getElementById('progressBar');
-    const progressContainer = document.getElementById('progressContainer');
-    let isPlaying = false;
-
-    function initPage() {
-      document.getElementById('overlay').classList.add('hidden');
-      togglePlay();
-    }
-
-    function togglePlay() {
-      if (isPlaying) {
-        audio.pause();
-        playIcon.innerHTML = '<path d="M8,5V19L19,12L8,5Z"/>'; // Play icon
-      } else {
-        audio.play().catch(err => console.log("Playback interaction bypass handled."));
-        playIcon.innerHTML = '<path d="M14,19H18V5H14M6,19H10V5H6V19Z"/>'; // Pause icon
-      }
-      isPlaying = !isPlaying;
-    }
-
-    playBtn.addEventListener('click', togglePlay);
-
-    // Sync Audio Progress Line
-    audio.addEventListener('timeupdate', () => {
-      const percentage = (audio.currentTime / audio.duration) * 100;
-      progressBar.style.width = percentage + '%';
-    });
-
-    progressContainer.addEventListener('click', (e) => {
-      const coordX = e.offsetX;
-      const totalWidth = progressContainer.clientWidth;
-      const clickPercent = (coordX / totalWidth);
-      audio.currentTime = clickPercent * audio.duration;
-    });
-
-
-    // --- 2. LIVE CLOCK & DATE LOGIC ---
-    function updateDateTime() {
-      const now = new Date();
-      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      const dateString = now.toLocaleDateString('id-ID', options);
-      const timeString = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      
-      document.getElementById('liveDateTime').innerText = `${dateString} • ${timeString}`;
-    }
-    setInterval(updateDateTime, 1000);
-    updateDateTime();
-
-
-    // --- 3. BOKEH BLUR FLOATING PARTICLES ---
-    const bokehContainer = document.getElementById('bokehContainer');
-    const maxBokeh = 12;
-
-    for (let i = 0; i < maxBokeh; i++) {
-      const bokeh = document.createElement('div');
-      bokeh.classList.add('bokeh');
-      
-      const size = Math.random() * 150 + 80;
-      bokeh.style.width = size + 'px';
-      bokeh.style.height = size + 'px';
-      
-      bokeh.style.top = Math.random() * 100 + 'vh';
-      bokeh.style.left = Math.random() * 100 + 'vw';
-      
-      bokeh.style.animationDelay = (Math.random() * 8) + 's';
-      bokeh.style.animationDuration = (Math.random() * 10 + 10) + 's';
-      
-      bokehContainer.appendChild(bokeh);
-    }
-
-
-    // --- 4. SAKURA CANVAS FALLING ANIMATION ---
-    const canvas = document.getElementById('sakuraCanvas');
-    const ctx = canvas.getContext('2d');
-
-    let arrPetals = [];
-    const totalPetals = 45;
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    class SakuraPetal {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height - canvas.height;
-        this.size = Math.random() * 8 + 6;
-        this.speedX = Math.random() * 1.5 - 0.5;
-        this.speedY = Math.random() * 1.2 + 0.8;
-        this.opacity = Math.random() * 0.4 + 0.5;
-        this.flip = Math.random();
-        this.flipSpeed = Math.random() * 0.03 + 0.01;
-      }
-
-      draw() {
-        if (this.y > canvas.height || this.x > canvas.width || this.x < -10) {
-          this.x = Math.random() * canvas.width;
-          this.y = -20;
-          this.speedX = Math.random() * 1.5 - 0.5;
-          this.speedY = Math.random() * 1.2 + 0.8;
-          this.flip = Math.random();
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Everything ✨</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #1a0916;
         }
+        .font-serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        /* Glassmorphism utility */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px border;
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+        /* Custom animations */
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-15px) scale(1.03); }
+        }
+        .animate-float {
+            animation: floating 3s ease-in-out infinite;
+        }
+        @keyframes pulse-soft {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        .animate-pulse-soft {
+            animation: pulse-soft 2s ease-in-out infinite;
+        }
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-slow 12s linear infinite;
+        }
+        /* Hide scrollbar during intro */
+        .no-scroll {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="text-stone-200 no-scroll relative selection:bg-pink-500/30 selection:text-pink-200">
 
-        ctx.save();
-        ctx.translate(this.x, this.y);
-        ctx.rotate(this.flip * Math.PI);
-        ctx.scale(this.flip, 1);
+    <canvas id="petals-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0"></canvas>
+
+    <div id="intro-screen" class="fixed inset-0 w-full h-full bg-[#130610] z-50 flex flex-col justify-center items-center transition-all duration-1000 ease-out">
+        <div class="text-center">
+            <button id="gift-box" class="animate-float focus:outline-none group relative p-8 mb-4">
+                <svg class="w-32 h-32 md:w-40 md:h-40 transition-transform duration-300 group-hover:scale-105" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="30" width="60" height="12" rx="2" fill="#D4AF37" stroke="#AA7C11" stroke-width="1.5"/>
+                    <rect x="24" y="42" width="52" height="40" rx="1" fill="#C59B27" stroke="#AA7C11" stroke-width="1.5"/>
+                    <rect x="46" y="30" width="8" height="52" fill="#991B1B"/>
+                    <rect x="20" y="32" width="60" height="6" fill="#B91C1C"/>
+                    <path d="M48 30C40 20 30 24 46 30Z" fill="#B91C1C" stroke="#991B1B" stroke-width="1"/>
+                    <path d="M52 30C60 20 70 24 54 30Z" fill="#B91C1C" stroke="#991B1B" stroke-width="1"/>
+                </svg>
+                <div class="absolute inset-0 bg-amber-400/10 blur-xl rounded-full scale-75 group-hover:scale-100 transition-transform duration-500"></div>
+            </button>
+            <p class="text-pink-300/80 font-light tracking-widest text-sm uppercase animate-pulse-soft mt-4 font-sans">
+                👆 tap to open your gift ✨
+            </p>
+        </div>
+    </div>
+
+    <div id="music-player" class="glass fixed bottom-6 left-6 z-40 p-3 rounded-2xl flex items-center gap-4 max-w-xs shadow-2xl transition-all duration-500 border border-white/5 opacity-0 translate-y-10">
+        <audio id="bg-music" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+        </audio>
         
-        ctx.beginPath();
-        // Drawing beautiful organic fluid sakura shape via custom curves
-        ctx.moveTo(0, 0);
-        ctx.bezierCurveTo(-this.size, -this.size/2, -this.size, this.size, 0, this.size * 1.5);
-        ctx.bezierCurveTo(this.size, this.size, this.size, -this.size/2, 0, 0);
+        <div class="relative w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-stone-800 border border-white/10">
+            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=200&auto=format&fit=crop" 
+                 alt="Semua Aku Rayakan Cover" 
+                 class="w-full h-full object-cover filter grayscale">
+        </div>
         
-        // Premium Pink Pastel Gradient for each blossom petal
-        const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size * 1.5);
-        grad.addColorStop(0, `rgba(255, 200, 212, ${this.opacity})`);
-        grad.addColorStop(1, `rgba(255, 183, 197, ${this.opacity * 0.4})`);
+        <div class="flex-1 min-w-[140px]">
+            <h4 class="text-xs font-semibold text-stone-100 truncate">Semua Aku Rayakan</h4>
+            <p class="text-[10px] text-pink-300/70 truncate">Nadin Amizah</p>
+            <div class="w-full bg-white/10 h-[3px] rounded-full mt-2 overflow-hidden">
+                <div id="music-progress" class="bg-pink-400 h-full w-0 transition-all duration-300"></div>
+            </div>
+        </div>
+
+        <button id="music-toggle" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-xs text-pink-300 focus:outline-none border border-white/10 transition-colors">
+            <i id="music-icon" class="fas fa-pause"></i>
+        </button>
+    </div>
+
+    <main id="main-content" class="opacity-0 transition-opacity duration-1000 max-w-4xl mx-auto px-6 md:px-12 space-y-40 md:space-y-56 pt-24 pb-32 relative z-10">
         
-        ctx.fillStyle = grad;
-        ctx.fill();
-        ctx.restore();
-      }
+        <section class="text-center pt-12 flex flex-col items-center justify-center min-h-[70vh]">
+            <span class="text-xs uppercase tracking-[0.3em] text-pink-300/60 mb-4 block font-medium">a birthday serenade in bloom</span>
+            <h1 class="font-serif text-4xl md:text-7xl font-light text-pink-100 tracking-wide leading-tight mb-6">
+                Happy Birthday, <br><span class="italic font-normal text-pink-200">My Everything</span>
+            </h1>
+            <p class="max-w-md mx-auto text-sm md:text-base text-stone-400 font-light leading-relaxed tracking-wide mb-12">
+                Hari ini semesta tersenyum lebih lebar, merayakan jiwamu yang membawa kehangatan tak tergantikan ke dalam hidupku.
+            </p>
+            <div class="flex flex-col items-center gap-3 group mt-4">
+                <div class="w-10 h-10 flex items-center justify-center text-pink-400/40 text-xl animate-spin-slow">
+                    <i class="fa-solid fa-asterisk"></i>
+                </div>
+                <span class="text-[10px] tracking-[0.4em] text-stone-500 uppercase transition-colors group-hover:text-pink-300/50">DISCOVER YOUR BIRTHDAY SURPRISE</span>
+                <i class="fa-solid fa-chevron-down text-xs text-stone-600 animate-bounce mt-1"></i>
+            </div>
+        </section>
 
-      update() {
-        this.x += this.speedX + Math.sin(this.y / 30) * 0.3;
-        this.y += this.speedY;
-        this.flip += this.flipSpeed;
-      }
-    }
+        <section class="max-w-2xl mx-auto space-y-8">
+            <div class="text-center md:text-left mb-6">
+                <span class="font-serif italic text-pink-300/70 text-lg md:text-xl block mb-2">from the bottom of my heart</span>
+                <h2 class="font-serif text-2xl md:text-4xl text-stone-100 leading-snug font-semibold">
+                    "Today is the day the world became more beautiful."
+                </h2>
+            </div>
+            <div class="space-y-6 text-sm md:text-base text-stone-300 font-light leading-relaxed tracking-wide text-justify">
+                <p>
+                    Selamat mengulang tahun untuk seseorang yang kehadirannya selalu berhasil meredam bisingnya dunia. Tidak ada kata yang cukup megah untuk merayakan betapa beruntungnya aku bisa menyaksikan senyummu tumbuh dari hari ke hari, merapikan kekacauan, dan membawa damai yang begitu sederhana namun mendalam.
+                </p>
+                <p>
+                    Terima kasih telah menjadi tempat pulang paling nyaman, menjadi sabar yang tak pernah habis, dan menjadi cinta yang selalu kurayakan setiap detiknya. Semoga semua kebaikan yang kamu tabur di dunia ini, berbalik memelukmu dengan kebahagiaan yang jauh lebih besar hari ini dan seterusnya.
+                </p>
+                <p class="text-right font-serif italic text-pink-300 text-lg mt-8 pt-4 border-t border-white/5">
+                    — Yours, always & forever 🌹
+                </p>
+            </div>
+        </section>
 
-    function initSakura() {
-      for (let i = 0; i < totalPetals; i++) {
-        arrPetals.push(new SakuraPetal());
-      }
-    }
+        <section class="space-y-12">
+            <div class="text-center">
+                <h2 class="font-serif text-3xl md:text-4xl text-pink-100 italic">What I Celebrate About You</h2>
+                <div class="h-[1px] w-16 bg-pink-400/30 mx-auto mt-4"></div>
+            </div>
 
-    function animateSakura() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      arrPetals.forEach(petal => {
-        petal.update();
-        petal.draw();
-      });
-      requestAnimationFrame(animateSakura);
-    }
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="glass p-6 rounded-2xl border border-white/5 hover:border-pink-500/20 transition-all duration-500 group hover:-translate-y-1">
+                    <div class="w-10 h-10 rounded-full bg-pink-500/10 flex items-center justify-center text-pink-300 mb-4 group-hover:bg-pink-500/20 transition-colors">
+                        <i class="fa-regular fa-face-smile text-lg"></i>
+                    </div>
+                    <h3 class="font-serif text-lg text-stone-100 mb-2 font-medium">Your Smile</h3>
+                    <p class="text-xs text-stone-400 leading-relaxed font-light">Lengkung senyum sederhana yang selalu sukses mematahkan seluruh mendung dan rasa lelah di hariku.</p>
+                </div>
+                <div class="glass p-6 rounded-2xl border border-white/5 hover:border-pink-500/20 transition-all duration-500 group hover:-translate-y-1">
+                    <div class="w-10 h-10 rounded-full bg-pink-500/10 flex items-center justify-center text-pink-300 mb-4 group-hover:bg-pink-500/20 transition-colors">
+                        <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
+                    </div>
+                    <h3 class="font-serif text-lg text-stone-100 mb-2 font-medium">Your Soul</h3>
+                    <p class="text-xs text-stone-400 leading-relaxed font-light">Ketulusan dan keindahan jiwamu membuat segalanya terasa lebih bermakna dan berharga untuk dijalani.</p>
+                </div>
+                <div class="glass p-6 rounded-2xl border border-white/5 hover:border-pink-500/20 transition-all duration-500 group hover:-translate-y-1">
+                    <div class="w-10 h-10 rounded-full bg-pink-500/10 flex items-center justify-center text-pink-300 mb-4 group-hover:bg-pink-500/20 transition-colors">
+                        <i class="fa-solid fa-seedling text-lg"></i>
+                    </div>
+                    <h3 class="font-serif text-lg text-stone-100 mb-2 font-medium">Your Kindness</h3>
+                    <p class="text-xs text-stone-400 leading-relaxed font-light">Bagaimana caramu memperlakukan sekelilingmu dengan kelembutan yang selalu membuatku kagum tiada henti.</p>
+                </div>
+                <div class="glass p-6 rounded-2xl border border-white/5 hover:border-pink-500/20 transition-all duration-500 group hover:-translate-y-1">
+                    <div class="w-10 h-10 rounded-full bg-pink-500/10 flex items-center justify-center text-pink-300 mb-4 group-hover:bg-pink-500/20 transition-colors">
+                        <i class="fa-solid fa-cloud-moon text-lg"></i>
+                    </div>
+                    <h3 class="font-serif text-lg text-stone-100 mb-2 font-medium">Your Laughter</h3>
+                    <p class="text-xs text-stone-400 leading-relaxed font-light">Suara paling merdu dan candu di semesta yang bisa mengubah hari buruk instan menjadi penuh warna.</p>
+                </div>
+                <div class="glass p-6 rounded-2xl border border-white/5 hover:border-pink-500/20 transition-all duration-500 group hover:-translate-y-1">
+                    <div class="w-10 h-10 rounded-full bg-pink-500/10 flex items-center justify-center text-pink-300 mb-4 group-hover:bg-pink-500/20 transition-colors">
+                        <i class="fa-regular fa-heart text-lg"></i>
+                    </div>
+                    <h3 class="font-serif text-lg text-stone-100 mb-2 font-medium">Your Strength</h3>
+                    <p class="text-xs text-stone-400 leading-relaxed font-light">Ketangguhanmu menghadapi dunia, menginspirasiku untuk terus menjadi versi terbaik bersamamu.</p>
+                </div>
+                <div class="glass p-6 rounded-2xl border border-white/5 hover:border-pink-500/20 transition-all duration-500 group hover:-translate-y-1">
+                    <div class="w-10 h-10 rounded-full bg-pink-500/10 flex items-center justify-center text-pink-300 mb-4 group-hover:bg-pink-500/20 transition-colors">
+                        <i class="fa-solid fa-heart text-lg text-pink-400"></i>
+                    </div>
+                    <h3 class="font-serif text-lg text-stone-100 mb-2 font-medium">Simply You</h3>
+                    <p class="text-xs text-stone-400 leading-relaxed font-light">Menjadi dirimu apa adanya sudah lebih dari cukup untuk membuatku merasa paling beruntung.</p>
+                </div>
+            </div>
+        </section>
 
-    initSakura();
-    animateSakura();
-  </script>
-</body>
-  </html>
-  
+        <section class="space-y-10">
+            <div class="text-center">
+                <h2 class="font-serif text-3xl md:text-4xl text-pink-100 italic">A Garden Blooming Just For You Today</h2>
+                <p class="text-xs text-stone-400/80 mt-2 tracking-wider">👆 touch each flower - a birthday wish is hiding inside ✨</p>
+            </div>
+
+            <div class="glass rounded-3xl p-8 max-w-2xl mx-auto flex flex-col items-center justify-center gap-8 border border-white/5 shadow-inner">
+                <div class="flex justify-center items-center gap-4 md:gap-7 flex-wrap">
+                    <button class="flower-btn text-3xl md:text-4xl focus:outline-none transform hover:scale-125 hover:rotate-12 transition-all duration-300" data-wish="Semoga kebahagiaanmu tumbuh mekar seindah kelopak mawar di setiap paginya. 🌹">🌸</button>
+                    <button class="flower-btn text-3xl md:text-4xl focus:outline-none transform hover:scale-125 hover:rotate-12 transition-all duration-300" data-wish="Apapun impian yang sedang kamu kejar, semoga jalanmu dilapangkan dan selalu dijaga. 🌷">🌹</button>
+                    <button class="flower-btn text-3xl md:text-4xl focus:outline-none transform hover:scale-125 hover:rotate-12 transition-all duration-300" data-wish="Semoga senyuman manismu tak pernah pudar, tetap menjadi mentari hangat bagi sekitarmu. 🌻">🌺</button>
+                    <button class="flower-btn text-3xl md:text-4xl focus:outline-none transform hover:scale-125 hover:rotate-12 transition-all duration-300" data-wish="Diberikan kesehatan, kekuatan, dan ketenangan dalam setiap langkah barumu ke depan. 🌼">🌻</button>
+                    <button class="flower-btn text-3xl md:text-4xl focus:outline-none transform hover:scale-125 hover:rotate-12 transition-all duration-300" data-wish="Semoga semesta menjauhkanmu dari segala sedih dan menggantinya dengan damai yang melimpah. 🌿">🌼</button>
+                    <button class="flower-btn text-3xl md:text-4xl focus:outline-none transform hover:scale-125 hover:rotate-12 transition-all duration-300" data-wish="Di umur yang baru ini, kupersembahkan doa terbaik agar hatimu dipenuhi rasa syukur yang utuh. 💎">🌷</button>
+                    <button class="flower-btn text-3xl md:text-4xl focus:outline-none transform hover:scale-125 hover:rotate-12 transition-all duration-300" data-wish="Dan semoga, aku tetap diizinkan ada di sisimu untuk merayakan tahun-tahun luar biasa berikutnya. 🤍">💐</button>
+                </div>
+
+                <div class="w-full min-h-[50px] text-center border-t border-white/5 pt-4 flex items-center justify-center">
+                    <p id="wish-display" class="font-serif italic text-pink-200/80 text-sm md:text-base max-w-md transition-opacity duration-300">
+                        "Pilih dan sentuh sekuntum bunga di atas untuk membaca untaian doa..."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="space-y-12">
+            <div class="text-center">
+                <h2 class="font-serif text-3xl md:text-4xl text-pink-100 italic">Your Beautiful Pictures</h2>
+                <div class="h-[1px] w-16 bg-pink-400/30 mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 max-w-xl mx-auto">
+                <div class="relative aspect-square rounded-2xl overflow-hidden bg-stone-800 border border-white/5 group shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=500&auto=format&fit=crop" 
+                         alt="Your Pic 1" 
+                         class="w-full h-full object-cover filter grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80"></div>
+                    <span class="absolute bottom-4 left-0 right-0 text-center font-serif text-stone-200/90 tracking-widest text-sm lowercase italic">you</span>
+                </div>
+                <div class="relative aspect-square rounded-2xl overflow-hidden bg-stone-800 border border-white/5 group shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=500&auto=format&fit=crop" 
+                         alt="Your Pic 2" 
+                         class="w-full h-full object-cover filter grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80"></div>
+                    <span class="absolute bottom-4 left-0 right-0 text-center font-serif text-stone-200/90 tracking-widest text-sm lowercase italic">are</span>
+                </div>
+                <div class="relative aspect-square rounded-2xl overflow-hidden bg-stone-800 border border-white/5 group shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=500&auto=format&fit=crop" 
+                         alt="Your Pic 3" 
+                         class="w-full h-full object-cover filter grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80"></div>
+                    <span class="absolute bottom-4 left-0 right-0 text-center font-serif text-stone-200/90 tracking-widest text-sm lowercase italic">so</span>
+                </div>
+                <div class="relative aspect-square rounded-2xl overflow-hidden bg-stone-800 border border-white/5 group shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=500&auto=format&fit=crop" 
+                         alt="Your Pic 4" 
+                         class="w-full h-full object-cover filter grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80"></div>
+                    <span class="absolute bottom-4 left-0 right-0 text-center font-serif text-stone-200/90 tracking-widest text-sm lowercase italic">beautiful</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="text-center space-y-16 pt-12">
+            <div class="max-w-lg mx-auto space-y-6">
+                <h2 class="font-serif text-3xl md:text-5xl text-pink-100 font-light leading-tight">You Are Loved <br><span class="italic font-normal">More Than You Know</span></h2>
+                <p class="text-xs md:text-sm text-stone-400 leading-relaxed font-light tracking-wide">
+                    Halaman kecil ini tid
